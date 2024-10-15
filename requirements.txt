@@ -1,0 +1,31 @@
+# Core dependencies
+numpy==1.23.5
+scipy==1.11.2
+
+# NLP and Language Models
+transformers==4.31.0
+torch==2.0.1
+
+# Computer Vision (for object detection and AR context)
+opencv-python==4.8.0.76
+
+# Sequential Monte Carlo (for twisted SMC)
+pymc3==3.11.5
+
+# Additional tools for probabilistic computation
+numpyro==0.12.1
+
+# AR/Spatial Awareness Libraries (placeholder for ARKit/ARCore integrations)
+# Install ARKit/ARCore SDK separately based on your platform needs
+# You may need to install ARCore or ARKit SDK manually for mobile app development
+# ar-core or ar-kit libraries will be integrated later as per your platform
+
+# Visualization and Utility Libraries (optional for debugging)
+matplotlib==3.8.0
+
+# Optional: Web Interface (if you plan to build an interactive web service)
+Flask==2.3.3
+
+# Testing libraries (for unit tests)
+pytest==7.4.0
+

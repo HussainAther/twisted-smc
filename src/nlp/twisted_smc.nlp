@@ -1,0 +1,40 @@
+import numpy as np
+
+class TwistedSMC:
+    def __init__(self, num_particles, proposal_dist, twist_function):
+        self.num_particles = num_particles
+        self.proposal_dist = proposal_dist
+        self.twist_function = twist_function
+        self.particles = []
+        self.weights = []
+
+    def initialize_particles(self, initial_state):
+        # Initialize particles from the proposal distribution
+        self.particles = self.proposal_dist.sample(self.num_particles, initial_state)
+        self.weights = np.ones(self.num_particles) / self.num_particles
+
+    def twist(self, particles, context):
+        # Modify proposal distribution with the twist function
+        return self.twist_function(particles, context)
+
+    def resample(self):
+        # Resample particles based on their weights
+        indices = np.random.choice(len(self.particles), size=len(self.particles), p=self.weights)
+        self.particles = [self.particles[i] for i in indices]
+        self.weights = np.ones(self.num_particles) / self.num_particles
+
+    def step(self, context):
+        # Propose new particles based on context
+        proposed_particles = self.twist(self.particles, context)
+        # Update weights (simplified likelihood update)
+        self.weights = self.compute_weights(proposed_particles, context)
+        self.resample()
+
+    def compute_weights(self, particles, context):
+        # Compute particle weights based on context (simplified)
+        return np.array([self.likelihood(p, context) for p in particles])
+
+    def likelihood(self, particle, context):
+        # Compute likelihood of a particle given the context
+        return np.random.random()  # Placeholder for actual likelihood computation
+
